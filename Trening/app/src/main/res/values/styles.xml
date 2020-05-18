@@ -6,6 +6,25 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColor">#fcfcfc</item>
+        <item name="buttonColor">#665F5F</item>
+        <item name="textColor">#000000</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTranslation</item>
     </style>
 
+    <!-- Night mode application theme. -->
+    <style name="DarkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#212121</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="backgroundColor">#303030</item>
+        <item name="buttonColor">#212121</item>
+        <item name="textColor">#fcfcfc</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTranslation</item>
+    </style>
+    <style name="WindowAnimationTranslation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
 </resources>

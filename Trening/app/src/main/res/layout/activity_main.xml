@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="?attr/backgroundColor">
 
     <TextView
         android:id="@+id/textView"
+        android:textColor="?attr/textColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -19,9 +21,13 @@
 
     <Button
         android:id="@+id/button"
+        android:textColor="#fff"
+        android:background="?attr/buttonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
         android:onClick="onClick"
         android:text="@string/ustawienia_konta"
         app:layout_constraintEnd_toEndOf="parent"
