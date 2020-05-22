@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pic"
-    tools:context=".treningi.Cwiczenie">
+    tools:context=".treningi.ExerciseActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/cwiczenie_toolbar"
@@ -30,7 +30,7 @@
         android:alpha="0.8"
         android:background="@drawable/box"
         android:foreground="@drawable/back"
-        android:onClick="NavigateTrening"
+        android:onClick="NavigateTraining"
         android:tint="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

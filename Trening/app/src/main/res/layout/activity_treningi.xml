@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_pic"
     android:foregroundGravity="top"
-    tools:context=".treningi.Treningi">
+    tools:context=".treningi.TrainingsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/trainings_toolbar"
@@ -60,7 +60,7 @@
         android:alpha="0.8"
         android:background="@drawable/circle"
         android:foreground="@drawable/ic_add_circle_outline_black_24dp"
-        android:onClick="NavigateDodajTrening"
+        android:onClick="NavigateAddTraining"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

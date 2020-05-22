@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pic"
-    tools:context=".treningi.Trening">
+    tools:context=".treningi.TrainingActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/trening_toolbar"
@@ -33,13 +33,13 @@
         android:alpha="0.8"
         android:background="@drawable/box"
         android:foreground="@drawable/back"
-        android:onClick="NavigateDodajTrening"
+        android:onClick="NavigateAddTraining"
         android:tint="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/ecercise_list"
+        android:id="@+id/exercise_list"
         android:layout_width="350dp"
         android:layout_height="500dp"
         android:alpha="0.8"
@@ -59,7 +59,7 @@
         android:alpha="0.8"
         android:background="@drawable/circle"
         android:foreground="@drawable/ic_add_circle_outline_black_24dp"
-        android:onClick="NavigateCwiczeneie"
+        android:onClick="NavigateExercise"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -74,7 +74,7 @@
         android:alpha="0.8"
         android:background="@drawable/box"
         android:foreground="@drawable/ic_save_black_24dp"
-        android:onClick="dodajTrening"
+        android:onClick="addTraining"
         app:layout_constraintEnd_toEndOf="@+id/trening_toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 

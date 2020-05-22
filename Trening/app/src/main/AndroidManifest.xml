@@ -9,10 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".treningi.DodajTrening"></activity>
-        <activity android:name=".treningi.Trening" />
-        <activity android:name=".treningi.Treningi" />
-        <activity android:name=".treningi.Cwiczenie" />
+        <activity android:name=".treningi.AddTrainingActivity"></activity>
+        <activity android:name=".treningi.TrainingActivity" />
+        <activity android:name=".treningi.TrainingsActivity" />
+        <activity android:name=".treningi.ExerciseActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -5,19 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.planertreningow.treningi.Treningi;
-import com.example.planertreningow.treningi.tables.MySQLiteTreningi;
+import com.example.planertreningow.treningi.TrainingsActivity;
+import com.example.planertreningow.treningi.encje.Training;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    MySQLiteTreningi treningi;
-
+    private ArrayList<Training>trainings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        checkIfExtras();
     }
 
     public void NavigateHistoryActivity(View view){
@@ -31,12 +32,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void NavigateTrainingActivity(View view){
-        // TODO: 07.05.2020 add Training activity
-        startActivity(new Intent(this, Treningi.class));
+        if(trainings!=null){
+            startActivity(new Intent(this, TrainingsActivity.class).
+                    putExtra("trainings", trainings));
+        }else {
+            startActivity(new Intent(this, TrainingsActivity.class));
+        }
     }
 
     public void NavigateSettings(View view){
         // TODO: 07.05.2020 add Settings Activity here
 //        startActivity(new Intent(this, SettingsActivity.class));
     }
+
+    public void checkIfExtras(){
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
+            if(extras.getSerializable("trainings")!=null){
+                trainings = (ArrayList<Training>)extras.getSerializable("trainings");
+            }// should be always in every activity to get the list of trainings
+        }
+    } // getting the extras if exist
 }

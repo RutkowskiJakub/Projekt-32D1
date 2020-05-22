@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pic"
-    tools:context=".treningi.DodajTrening">
+    tools:context=".treningi.AddTrainingActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/add_training_toolbar"
@@ -33,7 +33,7 @@
         android:alpha="0.8"
         android:background="@drawable/box"
         android:foreground="@drawable/back"
-        android:onClick="NavigateTreningi"
+        android:onClick="NavigateTrainings"
         android:tint="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -63,9 +63,20 @@
         android:layout_height="90dp"
         android:background="@drawable/circle"
         android:foreground="@drawable/ic_add_circle_outline_black_24dp"
-        android:onClick="NavigateTrening"
+        android:onClick="NavigateTraining"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/save_training_name"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:alpha="0.8"
+        android:background="@drawable/box"
+        android:foreground="@drawable/ic_save_black_24dp"
+        android:onClick="saveChangedName"
+        app:layout_constraintEnd_toEndOf="@+id/add_training_toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
