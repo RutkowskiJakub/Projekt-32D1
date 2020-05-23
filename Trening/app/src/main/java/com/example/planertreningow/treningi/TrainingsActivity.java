@@ -86,6 +86,12 @@ public class TrainingsActivity extends AppCompatActivity {
 //                remove exact item
                 trainings.remove(Integer.parseInt(idToRemove.getText().toString())-1);
 
+                for(Training train : trainings){
+                    if(train.get_id()>Integer.parseInt(idToRemove.getText().toString())){
+                        train.set_id(train.get_id()-1);
+                    }
+                }
+
 //                refresh list after deletion
                 refreshList(trainingList);
 

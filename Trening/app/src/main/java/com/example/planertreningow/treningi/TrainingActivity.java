@@ -37,7 +37,7 @@ public class TrainingActivity extends AppCompatActivity {
 
         checkIfExtras();
         getExercises();
-        
+
         refreshExercise(exerciseList);
         deleteFromList(exerciseList);
         edit(exerciseList);
@@ -120,6 +120,12 @@ public class TrainingActivity extends AppCompatActivity {
 
 //                remove exact item
                 exercises.remove(Integer.parseInt(idToRemove.getText().toString())-1);
+
+                for(Exercise exerc : exercises){
+                    if(exerc.get_id()>Integer.parseInt(idToRemove.getText().toString())){
+                        exerc.set_id(exerc.get_id()-1);
+                    }
+                }
 
 //                refresh list after deletion
                 refreshExercise(exercise_list);
