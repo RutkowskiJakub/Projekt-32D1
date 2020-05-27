@@ -7,10 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import com.example.planertreningow.R;
-import com.example.planertreningow.treningi.encje.Exercise;
 import com.example.planertreningow.treningi.encje.Training;
 
 import java.util.ArrayList;
@@ -21,7 +19,8 @@ public class AddTrainingActivity extends AppCompatActivity {
     private ArrayList<Training>templates;
 
     private Training training;
-    ImageButton imageButton;
+    ImageButton saveButton;
+    ImageButton deleteButton;
     private boolean editing = false;
 
     @Override
@@ -29,7 +28,8 @@ public class AddTrainingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dodaj_trening);
         training = new Training();
-        imageButton = findViewById(R.id.save_training_name);
+        saveButton = findViewById(R.id.save_training_name);
+        deleteButton = findViewById(R.id.delete_training_button);
 
         checkIfExtras();
     }
@@ -49,6 +49,19 @@ public class AddTrainingActivity extends AppCompatActivity {
                 putExtra("templates", templates).
                 putExtra("trainings",trainings));
     } // to TrainingsActivity
+    public void Delete(View view){
+        trainings.remove(training.get_id()-1);
+
+        for(Training train : trainings){
+            if(train.get_id()>training.get_id()-1){
+                train.set_id(train.get_id()-1);
+            }
+        }
+
+        startActivity(new Intent(this, TrainingsActivity.class).
+                putExtra("templates", templates).
+                putExtra("trainings", trainings));
+    }
     public void Next(View view){
 //        get extras if there are any
         Bundle extras = getIntent().getExtras();
@@ -79,10 +92,12 @@ public class AddTrainingActivity extends AppCompatActivity {
                 training = (Training) extras.getSerializable("training");
                 EditText trainingName = (EditText) findViewById(R.id.training_name);
                 trainingName.setText(training.getName());
-                imageButton.setVisibility(View.VISIBLE);
+                saveButton.setVisibility(View.VISIBLE);
+                deleteButton.setVisibility(View.VISIBLE);
                 editing = true;
             }else {
-                imageButton.setVisibility(View.INVISIBLE);
+                saveButton.setVisibility(View.INVISIBLE);
+                deleteButton.setVisibility(View.INVISIBLE);
             }
 
             //            every activity must have these trainings and templates

@@ -33,12 +33,10 @@ public class TrainingsActivity extends AppCompatActivity {
         trainings = new ArrayList<>();
         ListView trainingsList = findViewById(R.id.trainings_list);
 
-        CreateExampleTraining();
         checkIfExtras();
 
 //        set adapter
         refreshList(trainingsList);
-        deleteFromList(trainingsList);
         edit(trainingsList);
     }
 
@@ -69,6 +67,7 @@ public class TrainingsActivity extends AppCompatActivity {
             }
         });
     }// put list and exact item to edit
+
 //    Utilities
     public void checkIfExtras(){
         Bundle extras = getIntent().getExtras();
@@ -80,32 +79,10 @@ public class TrainingsActivity extends AppCompatActivity {
             if(extras.getSerializable("templates")!=null){
                 templates = (ArrayList<Training>)extras.getSerializable("templates");
             }
-        }
-    }
-    public void deleteFromList(final ListView trainingList){
-        trainingList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-
-//                get right item form list
-                TextView idToRemove = view.findViewById(R.id.training_id_list_item);
-
-//                remove exact item
-                trainings.remove(Integer.parseInt(idToRemove.getText().toString())-1);
-
-//                change ids fo list items
-                for(Training train : trainings){
-                    if(train.get_id()>Integer.parseInt(idToRemove.getText().toString())){
-                        train.set_id(train.get_id()-1);
-                    }
-                }
-
-//                refresh list after deletion
-                refreshList(trainingList);
-
-                return true;
+            if(trainings.size()==0){
+                CreateExampleTraining();
             }
-        });
+        }
     }
     public void refreshList(ListView trainingList){
         TrainingsListAdapter adapter = new TrainingsListAdapter(getApplicationContext(), trainings);
@@ -126,6 +103,7 @@ public class TrainingsActivity extends AppCompatActivity {
             training.set_id(id);
         }
     }
+
 //    some example
     public void CreateExampleTraining(){
     ArrayList<Set>set1 = new ArrayList<>();

@@ -17,7 +17,8 @@ public class AddTemplateActivity extends AppCompatActivity {
     private ArrayList<Training> trainings;
     private ArrayList<Training> templates;
     private Training template;
-    ImageButton imageButton;
+    ImageButton saveButton;
+    ImageButton deleteButton;
     private boolean editing;
 
     @Override
@@ -25,7 +26,8 @@ public class AddTemplateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_template);
         template = new Training();
-        imageButton = findViewById(R.id.save_training_name);
+        saveButton = findViewById(R.id.save_training_name);
+        deleteButton = findViewById(R.id.delete_template_button);
 
         checkIfExtras();
     }
@@ -59,6 +61,18 @@ public class AddTemplateActivity extends AppCompatActivity {
                 putExtra("trainings", trainings).
                 putExtra("templates", templates));
     } // save and go back to TemplatesActivity
+    public void Delete(View view){
+        templates.remove(template.get_id()-1);
+
+        for(Training temp : templates){
+            if(temp.get_id()>template.get_id()-1){
+                temp.set_id(temp.get_id()-1);
+            }
+        }
+        startActivity(new Intent(this, TemplatesActivity.class).
+                putExtra("trainings", trainings).
+                putExtra("templates", templates));
+    }
 //    Utilities
     public void checkIfExtras(){
         Bundle extras = getIntent().getExtras();
@@ -68,10 +82,12 @@ public class AddTemplateActivity extends AppCompatActivity {
                 template = (Training) extras.getSerializable("template");
                 EditText trainingName = (EditText) findViewById(R.id.training_name);
                 trainingName.setText(template.getName());
-                imageButton.setVisibility(View.VISIBLE);
+                saveButton.setVisibility(View.VISIBLE);
+                deleteButton.setVisibility(View.VISIBLE);
                 editing = true;
             }else {
-                imageButton.setVisibility(View.INVISIBLE);
+                saveButton.setVisibility(View.INVISIBLE);
+                deleteButton.setVisibility(View.INVISIBLE);
             }
             if(extras.getSerializable("trainings")!=null){
                 trainings = (ArrayList<Training>)extras.getSerializable("trainings");

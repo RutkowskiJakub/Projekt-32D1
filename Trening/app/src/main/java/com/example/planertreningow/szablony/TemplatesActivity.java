@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.planertreningow.MainActivity;
 import com.example.planertreningow.R;
@@ -36,7 +37,8 @@ public class TemplatesActivity extends AppCompatActivity {
 
         refreshList(templatesList);
         edit(templatesList);
-        deleteFromList(templatesList);
+        addToTrainings(templatesList);
+
     }
 
 //  Navigation
@@ -72,7 +74,8 @@ public class TemplatesActivity extends AppCompatActivity {
             }// should be always in every activity to get the list of trainings
             if(extras.getSerializable("templates")!=null){
                 templates = (ArrayList<Training>)extras.getSerializable("templates");
-            }else{
+            }
+            if(templates.size()==0) {
                 someTemplates();
             }
         }
@@ -96,25 +99,30 @@ public class TemplatesActivity extends AppCompatActivity {
         TrainingsListAdapter adapter = new TrainingsListAdapter(this, templates);
         templatesList.setAdapter(adapter);
     } // just refreshing the list
-    public void deleteFromList(final ListView templatesList){
+    public void addToTrainings(final ListView templatesList){
         templatesList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 //                get right item form list
-                TextView idToRemove = view.findViewById(R.id.training_id_list_item);
-//                remove exact item
-                templates.remove(Integer.parseInt(idToRemove.getText().toString())-1);
-//                change the id of list items
-                for(Training temp : templates){
-                    if(temp.get_id()>Integer.parseInt(idToRemove.getText().toString())){
-                        temp.set_id(temp.get_id()-1);
-                    }
-                }
+                TextView idToAdd = view.findViewById(R.id.training_id_list_item);
+
+            // dunno why but couldn't get rid of reference other way
+                Training templateToAdd = (Training) templates.get(
+                        Integer.parseInt(idToAdd.getText().toString())-1);
+                Training newTemplate = new Training(templateToAdd.get_id(),
+                        templateToAdd.getName(), templateToAdd.getExercises());
+
+//                set id and add new item to trainings
+                newTemplate.set_id(trainings.size()+1);
+                trainings.add(newTemplate);
+//                show some message for added
+                Toast.makeText(getApplicationContext(), "Dodano trening: "+
+                        newTemplate.getName(), Toast.LENGTH_SHORT).show();
+
 //                refresh list after deletion
                 refreshList(templatesList);
                 return true;
             }
         });
     } // delete item from list
-    // TODO: 23.05.2020 add possibility to choose template and probably add to my trainings
 }

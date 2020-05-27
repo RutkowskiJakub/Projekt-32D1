@@ -13,8 +13,8 @@ import com.example.planertreningow.treningi.encje.Training;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    private ArrayList<Training>trainings;
-    private ArrayList<Training>templates;
+    private ArrayList<Training>trainings = new ArrayList<>();
+    private ArrayList<Training>templates = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
