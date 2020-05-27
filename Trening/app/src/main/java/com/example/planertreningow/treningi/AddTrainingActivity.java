@@ -16,8 +16,11 @@ import com.example.planertreningow.treningi.encje.Training;
 import java.util.ArrayList;
 
 public class AddTrainingActivity extends AppCompatActivity {
-    private Training training;
+    //    every activity must have
     private ArrayList<Training>trainings;
+    private ArrayList<Training>templates;
+
+    private Training training;
     ImageButton imageButton;
     private boolean editing = false;
 
@@ -31,22 +34,22 @@ public class AddTrainingActivity extends AppCompatActivity {
         checkIfExtras();
     }
 
-//    navigate to TrainingsActivity
-    public void NavigateTrainings(View view){
+//    Navigation
+    public void Back(View view){
         startActivity(new Intent(this, TrainingsActivity.class).
+                putExtra("templates", templates).
                 putExtra("trainings", trainings));
-    }
-    public void saveChangedName(View view){
+    } // to TrainingsActivity
+    public void Save(View view){
         EditText training_name = findViewById(R.id.training_name);
         training.setName(training_name.getText().toString());
         trainings.set(training.get_id()-1, training);
 
         startActivity(new Intent(this, TrainingsActivity.class).
+                putExtra("templates", templates).
                 putExtra("trainings",trainings));
-    }
-
-//    navigate to TrainingActivity
-    public void NavigateTraining(View view){
+    } // to TrainingsActivity
+    public void Next(View view){
 //        get extras if there are any
         Bundle extras = getIntent().getExtras();
 //        extract the training name form input
@@ -64,10 +67,10 @@ public class AddTrainingActivity extends AppCompatActivity {
         startActivity(new Intent(this, TrainingActivity.class).
                 putExtra("training", training).
                 putExtra("trainings", trainings).
+                putExtra("templates", templates).
                 putExtra("editing", editing));
-    }
-
-//    utilities
+    } // to TrainingActivity
+//    Utilities
     public void checkIfExtras(){
         Bundle extras = getIntent().getExtras();
 //        if extras exist create obj else don't bother
@@ -81,8 +84,13 @@ public class AddTrainingActivity extends AppCompatActivity {
             }else {
                 imageButton.setVisibility(View.INVISIBLE);
             }
+
+            //            every activity must have these trainings and templates
             if(extras.getSerializable("trainings")!=null){
                 trainings = (ArrayList<Training>)extras.getSerializable("trainings");
+            }
+            if(extras.getSerializable("templates")!=null){
+                templates = (ArrayList<Training>)extras.getSerializable("templates");
             }
         }
     }

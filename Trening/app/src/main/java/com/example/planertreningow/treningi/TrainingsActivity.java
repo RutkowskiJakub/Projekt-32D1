@@ -19,8 +19,11 @@ import com.example.planertreningow.treningi.listAdapters.TrainingsListAdapter;
 import java.util.ArrayList;
 
 public class TrainingsActivity extends AppCompatActivity {
-    private Training training;
+    //    every activity must have
     private ArrayList<Training>trainings;
+    private ArrayList<Training>templates;
+
+    private Training training;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,15 +42,15 @@ public class TrainingsActivity extends AppCompatActivity {
         edit(trainingsList);
     }
 
-//    navigating in the same places with different purposes
-    public void NavigateMainMenu(View view){
+//    Navigation
+    public void Back(View view){
         startActivity(new Intent(this, MainActivity.class).
+                putExtra("templates", templates).
                 putExtra("trainings", trainings));
     }
-
-//    navigating in the same places with different purposes
-    public void NavigateAddTraining(View view){
+    public void Next(View view){
         startActivity(new Intent(this, AddTrainingActivity.class).
+                putExtra("templates", templates).
                 putExtra("trainings", trainings));
     }// just put trainings to not loose it
     public void edit(ListView training_list){
@@ -61,18 +64,22 @@ public class TrainingsActivity extends AppCompatActivity {
 //                pass training and trainingList to next activity to edit mf
                 startActivity(new Intent(getApplicationContext(), AddTrainingActivity.class).
                         putExtra("training", training).
+                        putExtra("templates", templates).
                         putExtra("trainings", trainings));
             }
         });
     }// put list and exact item to edit
-
-//    utilities
+//    Utilities
     public void checkIfExtras(){
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
+//            every activity must have these trainings and templates
             if(extras.getSerializable("trainings")!=null){
                 trainings = (ArrayList<Training>)extras.getSerializable("trainings");
-            }// should be always in every activity to get the list of trainings
+            }
+            if(extras.getSerializable("templates")!=null){
+                templates = (ArrayList<Training>)extras.getSerializable("templates");
+            }
         }
     }
     public void deleteFromList(final ListView trainingList){
@@ -86,6 +93,7 @@ public class TrainingsActivity extends AppCompatActivity {
 //                remove exact item
                 trainings.remove(Integer.parseInt(idToRemove.getText().toString())-1);
 
+//                change ids fo list items
                 for(Training train : trainings){
                     if(train.get_id()>Integer.parseInt(idToRemove.getText().toString())){
                         train.set_id(train.get_id()-1);
@@ -118,8 +126,7 @@ public class TrainingsActivity extends AppCompatActivity {
             training.set_id(id);
         }
     }
-
-//    just 4 checkout
+//    some example
     public void CreateExampleTraining(){
     ArrayList<Set>set1 = new ArrayList<>();
     set1.add(new Set(8, 60.0));

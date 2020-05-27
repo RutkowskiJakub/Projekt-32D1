@@ -18,8 +18,13 @@ public class Training implements Serializable {
         this.name = name;
         this.exercises=exercises;
     }
+    public Training(Integer _id, String name, ArrayList<Exercise> exercises) {
+        this._id = _id;
+        this.name = name;
+        this.exercises = exercises;
+    }
 
-//    getters
+    //    getters
     public Integer get_id() {
         return _id;
     }

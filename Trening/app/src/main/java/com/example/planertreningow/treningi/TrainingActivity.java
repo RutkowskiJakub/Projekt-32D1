@@ -18,8 +18,11 @@ import com.example.planertreningow.treningi.listAdapters.ExerciseListAdapter;
 import java.util.ArrayList;
 
 public class TrainingActivity extends AppCompatActivity {
+    //    every activity must have
+    private ArrayList<Training>trainings;
+    private ArrayList<Training>templates;
+
     private Training training;
-    private ArrayList<Training> trainings;
     private Exercise exercise;
     private ArrayList<Exercise> exercises;
 
@@ -44,17 +47,23 @@ public class TrainingActivity extends AppCompatActivity {
 
     }
 
-//    navigating in the same places with different purposes
-    public void NavigateAddTraining(View view){
-        startActivity(new Intent(this, AddTrainingActivity.class).
+//    Navigation
+    public void Back(View view){
+        Intent intent = new Intent(this, AddTrainingActivity.class).
                 putExtra("trainings", trainings).
-                putExtra("training", training));
+                putExtra("templates", templates).
+                putExtra("training", training);
+        if(editing){
+            intent.putExtra("editing", editing);
+        }
+        startActivity(intent);
     }// go back to AddTrainingActivity, pass current training and the list
-
-    public void NavigateExercise(View view){
+    public void Next(View view){
         startActivity(new Intent(this, ExerciseActivity.class).
                 putExtra("training", training).
-                putExtra("trainings", trainings));
+                putExtra("templates", templates).
+                putExtra("trainings", trainings).
+                putExtra("editing", editing));
     }// pass current training and the list of these go to ExerciseActivity
     public void edit(ListView exercise_list){
         exercise_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,12 +80,13 @@ public class TrainingActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ExerciseActivity.class).
                         putExtra("training", training).
                         putExtra("trainings", trainings).
-                        putExtra("exercise", exercise));
+                        putExtra("templates", templates).
+                        putExtra("exercise", exercise).
+                        putExtra("editing", editing));
             }
         });
     }// pass current training the list and editing item go to ExerciseActivity
-
-    public void addTraining(View view){
+    public void Save(View view){
         if(training.getExercises()!=null) {
             if(editing){
                 trainings.set(training.get_id()-1, training);
@@ -84,11 +94,11 @@ public class TrainingActivity extends AppCompatActivity {
                 trainings.add(training);
             }
             startActivity(new Intent(this, TrainingsActivity.class).
+                    putExtra("templates", templates).
                     putExtra("trainings", trainings));
         }
     }// passing just the list of trainings to TrainingsActivity
-
-//    utilities
+//    Utilities
     public void checkIfExtras(){
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
@@ -104,8 +114,13 @@ public class TrainingActivity extends AppCompatActivity {
             if(extras.get("editing")!=null){
                 this.editing = (boolean)extras.get("editing");
             }
+
+            //            every activity must have these trainings and templates
             if(extras.getSerializable("trainings")!=null){
-                this.trainings = (ArrayList<Training>) extras.getSerializable("trainings");
+                trainings = (ArrayList<Training>)extras.getSerializable("trainings");
+            }
+            if(extras.getSerializable("templates")!=null){
+                templates = (ArrayList<Training>)extras.getSerializable("templates");
             }
         }
     }

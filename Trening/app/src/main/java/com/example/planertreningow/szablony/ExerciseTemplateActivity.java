@@ -1,102 +1,99 @@
-package com.example.planertreningow.treningi;
+package com.example.planertreningow.szablony;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
 import com.example.planertreningow.R;
 import com.example.planertreningow.treningi.encje.Exercise;
 import com.example.planertreningow.treningi.encje.Set;
 import com.example.planertreningow.treningi.encje.Training;
+
 import java.util.ArrayList;
 
-public class ExerciseActivity extends AppCompatActivity {
-    //    every activity must have
+public class ExerciseTemplateActivity extends AppCompatActivity {
     private ArrayList<Training>trainings;
     private ArrayList<Training>templates;
-
-    private Training training;
+    private Training template;
     private Exercise exercise;
-    private ArrayList<Exercise>exercises;
-    private boolean editing = false;
+    private boolean editing;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cwiczenie);
+        setContentView(R.layout.activity_exercise_template);
         trainings = new ArrayList<>();
-        training = new Training();
+        templates = new ArrayList<>();
+        template = new Training();
         exercise = new Exercise();
-        exercises = new ArrayList<>();
 
         checkIfExtras();
     }
 
 //    Navigation
-    public void Back(View view){
-        Intent intent = new Intent(this, TrainingActivity.class);
-        intent.putExtra("training", training).
-                putExtra("templates", templates).
-                putExtra("trainings", trainings).
-                putExtra("editing", editing);
-        startActivity(intent);
-    } // to TrainingActivity
     public void Save(View view){
-        EditText exercise_name = (EditText)findViewById(R.id.exercise_name);
-        exercise.setName(exercise_name.getText().toString());
+        EditText exerciseName = findViewById(R.id.exercise_name);
+        exercise.setName(exerciseName.getText().toString());
 
         addSets();
 
-        Intent intent = new Intent(this, TrainingActivity.class);
-        intent.putExtra("training", training).
+        Intent intent = new Intent(this, TemplateActivity.class);
+        intent.putExtra("trainings", trainings).
                 putExtra("templates", templates).
-                putExtra("trainings", trainings).
+                putExtra("template", template).
                 putExtra("editing", editing);
+
         startActivity(intent);
 
-    } // to TrainingActivity
-//    Utilities
-    public void checkIfExtras() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if (extras.getSerializable("training") != null) {
-                training = (Training) extras.getSerializable("training");
-                if (training.getExercises() != null) {
-                    exercises = training.getExercises();
-                }
-            }
-            if(extras.getSerializable("editing")!= null){
-                editing = (boolean)extras.getSerializable("editing");
-            }
-            if (extras.getSerializable("exercise") != null) {
-                exercise = (Exercise) extras.getSerializable("exercise");
-                editing();
-            }// if exists then proceed to edit the exercise
+    }
+    public void Back(View view){
+        Intent intent = new Intent(this, TemplateActivity.class);
+        intent.putExtra("trainings", trainings).
+                putExtra("templates", templates).
+                putExtra("template", template).
+                putExtra("editing", editing);
 
-//            every activity must have these trainings and templates
+        startActivity(intent);
+    }
+//    Utilities
+    public void checkIfExtras(){
+        Bundle extras = getIntent().getExtras();
+        if(extras!=null){
             if(extras.getSerializable("trainings")!=null){
-                trainings = (ArrayList<Training>)extras.getSerializable("trainings");
+                this.trainings = (ArrayList<Training>) extras.getSerializable("trainings");
             }
             if(extras.getSerializable("templates")!=null){
-                templates = (ArrayList<Training>)extras.getSerializable("templates");
+                this.templates = (ArrayList<Training>) extras.getSerializable("templates");
+            }
+            if(extras.getSerializable("template")!=null) {
+                this.template = (Training) extras.getSerializable("template");
+            }
+            if(extras.getSerializable("editing")!=null){
+                editing = (boolean)extras.getSerializable("editing");
+            }
+            if(extras.getSerializable("exercise")!=null){
+                this.exercise = (Exercise) extras.getSerializable("exercise");
+                editing();
             }
         }
-    } // checking whether extras exist if so assigning them to variables
-    public void editing() {
-        EditText exercise_name = findViewById(R.id.exercise_name);
-        exercise_name.setText(exercise.getName());
+    }
+    private void editing() {
+        EditText exerciseName = findViewById(R.id.exercise_name);
+        exerciseName.setText(exercise.getName());
         setSets();
-    } // editing and setting the exercise's inputs while editing exercise
-    public void addSets(){
-        EditText powt1 = (EditText)findViewById(R.id.powt1);
-        EditText ciez1 = (EditText)findViewById(R.id.ciez1);
-        EditText powt2 = (EditText)findViewById(R.id.powt2);
-        EditText ciez2 = (EditText)findViewById(R.id.ciez2);
-        EditText powt3 = (EditText)findViewById(R.id.powt3);
-        EditText ciez3 = (EditText)findViewById(R.id.ciez3);
-        EditText powt4 = (EditText)findViewById(R.id.powt4);
-        EditText ciez4 = (EditText)findViewById(R.id.ciez4);
+    }
+    private void addSets() {
+        EditText powt1 = findViewById(R.id.powt1);
+        EditText ciez1 = findViewById(R.id.ciez1);
+        EditText powt2 = findViewById(R.id.powt2);
+        EditText ciez2 = findViewById(R.id.ciez2);
+        EditText powt3 = findViewById(R.id.powt3);
+        EditText ciez3 = findViewById(R.id.ciez3);
+        EditText powt4 = findViewById(R.id.powt4);
+        EditText ciez4 = findViewById(R.id.ciez4);
 
         ArrayList<Set> sets = new ArrayList<>();
         if(powt1.getText().toString().compareTo("")!=0&& ciez1.getText().toString().compareTo("")!=0) {
@@ -117,23 +114,24 @@ public class ExerciseActivity extends AppCompatActivity {
         }
 
         exercise.setSets(sets);
-        if(training.getExercises()==null){
-            training.setExercises(new ArrayList<Exercise>());
+
+        if(template.getExercises()==null){
+            template.setExercises(new ArrayList<Exercise>());
         }
-        // if not editing add exercise else change exercise
-        if(getIntent().getExtras().getSerializable("exercise")==null) {
+//        if editing then change the data
+        if(getIntent().getExtras().getSerializable("exercise")==null){
             setID();
-            training.addExercise(exercise);
-        }else {
-            training.getExercises().set(exercise.get_id()-1, exercise);
+            template.addExercise(exercise);
+        }else{
+            template.getExercises().set(exercise.get_id()-1, exercise);// get id -1 cuz the id;s are 1 higher than table indexes
         }
-    }// adding sets, id to exercise then adding exercise to training
-    public void setID(){
-        if(exercises.size()==0){
+    }
+    private void setID() {
+        if(template.getExercises().size()==0){
             exercise.set_id(1);
         }else{
             int id = 1;
-            for(Exercise ex : exercises){
+            for(Exercise ex : template.getExercises()){
                 if(ex.get_id() == id){
                     id++;
                 }else{
@@ -142,19 +140,19 @@ public class ExerciseActivity extends AppCompatActivity {
             }
             exercise.set_id(id);
         }
-    } // set id of the exercise
-    public void setSets() {
-        ArrayList<Set>sets = exercise.getSets();
-//        1 row
+    }
+    private void setSets(){
+        ArrayList<Set> sets = exercise.getSets();
+        //        1 row
         EditText powt1 = findViewById(R.id.powt1);
         EditText ciez1 = findViewById(R.id.ciez1);
-//        2 row
+        //        2 row
         EditText powt2 = findViewById(R.id.powt2);
         EditText ciez2 = findViewById(R.id.ciez2);
-//        3 row
+        //        3 row
         EditText powt3 = findViewById(R.id.powt3);
         EditText ciez3 = findViewById(R.id.ciez3);
-//        4 row
+        //        4 row
         EditText powt4 = findViewById(R.id.powt4);
         EditText ciez4 = findViewById(R.id.ciez4);
 
@@ -174,7 +172,5 @@ public class ExerciseActivity extends AppCompatActivity {
             powt4.setText(String.valueOf(sets.get(3).getRepeats()));
             ciez4.setText(String.valueOf(sets.get(3).getWeights()));
         }
-    } // put data int inputs while editing exercise
-
-
+    }
 }

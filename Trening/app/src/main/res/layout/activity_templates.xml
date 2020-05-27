@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_pic"
-    tools:context=".treningi.TrainingActivity">
+    android:foregroundGravity="top"
+    tools:context=".szablony.TemplatesActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/trening_toolbar"
+        android:id="@+id/trainings_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:alpha="0.8"
@@ -21,7 +22,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title="@string/training_title"
+        app:title="@string/trainings_title"
         app:titleMarginStart="170dp"
         app:titleTextColor="#FFFFFF" />
 
@@ -39,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/exercise_list"
+        android:id="@+id/templates_list"
         android:layout_width="350dp"
         android:layout_height="500dp"
         android:alpha="0.8"
@@ -49,10 +50,10 @@
         app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.398" />
+        app:layout_constraintVertical_bias="0.424" />
 
     <Button
-        android:id="@+id/add_exercise"
+        android:id="@+id/add_template"
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_marginTop="556dp"
@@ -65,18 +66,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.611" />
-
-    <ImageButton
-        android:id="@+id/save_training"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:alpha="0.8"
-        android:background="@drawable/box"
-        android:foreground="@drawable/ic_save_black_24dp"
-        android:onClick="Save"
-        app:layout_constraintEnd_toEndOf="@+id/trening_toolbar"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintVertical_bias="0.576" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:title="Trening"
+        app:title="@string/training_title"
         app:titleMarginStart="170dp"
         app:titleTextColor="#FFFFFF" />
 
@@ -33,7 +33,7 @@
         android:alpha="0.8"
         android:background="@drawable/box"
         android:foreground="@drawable/back"
-        android:onClick="NavigateTrainings"
+        android:onClick="Back"
         android:tint="@android:color/background_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -45,7 +45,7 @@
         android:background="@drawable/box"
         android:ems="10"
         android:gravity="center"
-        android:hint="Podaj nazwę treningu"
+        android:hint="@string/training_name_input_hint"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
@@ -63,7 +63,7 @@
         android:layout_height="90dp"
         android:background="@drawable/circle"
         android:foreground="@drawable/ic_add_circle_outline_black_24dp"
-        android:onClick="NavigateTraining"
+        android:onClick="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -76,7 +76,7 @@
         android:alpha="0.8"
         android:background="@drawable/box"
         android:foreground="@drawable/ic_save_black_24dp"
-        android:onClick="saveChangedName"
+        android:onClick="Save"
         app:layout_constraintEnd_toEndOf="@+id/add_training_toolbar"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-        <activity android:name=".treningi.AddTrainingActivity"></activity>
+        <activity android:name=".szablony.TemplateActivity"></activity>
+        <activity android:name=".szablony.ExerciseTemplateActivity" />
+        <activity android:name=".szablony.AddTemplateActivity" />
+        <activity android:name=".szablony.TemplatesActivity" />
+        <activity android:name=".treningi.AddTrainingActivity" />
         <activity android:name=".treningi.TrainingActivity" />
         <activity android:name=".treningi.TrainingsActivity" />
         <activity android:name=".treningi.ExerciseActivity" />
