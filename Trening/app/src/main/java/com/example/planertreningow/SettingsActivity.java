@@ -19,7 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
     private Switch nightMode;
     private Button avatarButton;
     private ImageView avatarImg;
-    private Integer counter = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
@@ -39,13 +39,7 @@ public class SettingsActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-                if(counter % 2 == 0){
-                    avatarImg.setImageDrawable(getDrawable(R.drawable.ic_smile));
-                }
-                else{
-                    avatarImg.setImageDrawable(getDrawable(R.drawable.ic_avatar));
-                }
-                counter++;
+                avatarImg.setImageDrawable(getDrawable(R.drawable.ic_smile));
             }
         });
         if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_YES){
