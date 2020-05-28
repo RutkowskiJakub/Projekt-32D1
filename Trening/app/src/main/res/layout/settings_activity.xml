@@ -1,0 +1,153 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/settings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="?attr/backgroundColor">
+
+    <ImageView
+        android:id="@+id/avatarImg"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_margin="15dp"
+        android:layout_marginStart="30px"
+        android:layout_marginLeft="30px"
+        android:layout_marginTop="30px"
+        android:layout_marginEnd="30px"
+        android:layout_marginRight="30px"
+        android:layout_marginBottom="30px"
+        android:contentDescription="@string/avatar_u_ytkownika"
+        app:srcCompat="@drawable/ic_avatar"
+        tools:ignore="VectorDrawableCompat" />
+
+    <Switch
+        android:id="@+id/tryb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/avatarImg"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="15dp"
+        android:text="@string/tryb_nocny"
+        android:textColor="?attr/textColor"
+        android:textSize="16dp" />
+
+    <Button
+        android:id="@+id/avatarButton"
+        android:textColor="#fff"
+        android:background="?attr/buttonColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_margin="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_toEndOf="@+id/avatarImg"
+        android:layout_toRightOf="@+id/avatarImg"
+        android:text="@string/zmie_avatar" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toEndOf="@+id/avatarImg"
+        android:layout_toRightOf="@+id/avatarImg"
+        android:text="@string/u_ytkownik"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="?attr/textColor"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/wagaPoczatkowa"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:hint="70kg"
+        android:inputType="text"
+        android:textColor="?attr/textColor" />
+
+    <EditText
+        android:id="@+id/wagaKoncowa"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_marginStart="169dp"
+        android:layout_marginLeft="169dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toEndOf="@+id/wagaPoczatkowa"
+        android:layout_toRightOf="@+id/wagaPoczatkowa"
+        android:ems="10"
+        android:hint="65kg"
+        android:inputType="text"
+        android:textColor="?attr/textColor" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tryb"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Twój cel do osiągnięcia:"
+        android:textSize="20dp"
+        android:textColor="?attr/textColor"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_margin="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Początkowa waga"
+        android:textColor="?attr/textColor"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="200dp"
+        android:layout_height="22dp"
+        android:layout_below="@+id/textView2"
+        android:layout_marginStart="116dp"
+        android:layout_marginLeft="116dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toEndOf="@+id/textView3"
+        android:layout_toRightOf="@+id/textView3"
+        android:text="Docelowa waga"
+        android:textColor="?attr/textColor"
+        android:textSize="16dp" />
+
+</RelativeLayout>
