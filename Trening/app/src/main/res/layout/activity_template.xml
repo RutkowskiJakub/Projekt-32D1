@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_pic"
+    tools:context=".szablony.TemplateActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/trening_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:background="@drawable/box"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:title="@string/training_title"
+        app:titleMarginStart="170dp"
+        app:titleTextColor="#FFFFFF" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:adjustViewBounds="false"
+        android:alpha="0.8"
+        android:background="@drawable/box"
+        android:foreground="@drawable/back"
+        android:tint="@android:color/background_light"
+        android:onClick="Back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/template_exercise_list"
+        android:layout_width="350dp"
+        android:layout_height="500dp"
+        android:alpha="0.8"
+        android:background="@drawable/box"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.398" />
+
+    <Button
+        android:id="@+id/template_add_exercise"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="556dp"
+        android:alpha="0.8"
+        android:background="@drawable/circle"
+        android:foreground="@drawable/ic_add_circle_outline_black_24dp"
+        android:onClick="Next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.611" />
+
+    <ImageButton
+        android:id="@+id/save_template_training"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:alpha="0.8"
+        android:background="@drawable/box"
+        android:foreground="@drawable/ic_save_black_24dp"
+        android:onClick="Save"
+        app:layout_constraintEnd_toEndOf="@+id/trening_toolbar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

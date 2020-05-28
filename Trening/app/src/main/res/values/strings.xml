@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">Planer Treningow</string>
     <string name="background">background</string>
+    <string name="template_title">Szablony</string>
+    <string name="trainings_title">Treningi</string>
+    <string name="training_title">Trening</string>
+    <string name="history_label">Historia</string>
+    <string name="settings_label">Ustawienia</string>
+    <string name="templates_label">Szablony</string>
+    <string name="trainings_label">Treningi</string>
+    <string name="menu_title">Menu</string>
+    <string name="training_name_input_hint">Podaj nazwę treningu</string>
+    <string name="exercise_title">Cwiczenie</string>
+    <string name="exercise_name_input_hint">Nazwa ćwiczenia</string>
+    <string name="series_label">Seria</string>
+    <string name="repeat_label">Powtórzenia</string>
+    <string name="weight_label">Ciężar</string>
 </resources>
