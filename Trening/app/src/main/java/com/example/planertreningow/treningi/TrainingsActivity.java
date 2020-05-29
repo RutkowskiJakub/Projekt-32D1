@@ -38,6 +38,8 @@ public class TrainingsActivity extends AppCompatActivity {
 //        set adapter
         refreshList(trainingsList);
         edit(trainingsList);
+
+
     }
 
 //    Navigation
