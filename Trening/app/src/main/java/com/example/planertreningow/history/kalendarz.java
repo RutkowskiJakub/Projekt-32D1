@@ -71,15 +71,12 @@ public class kalendarz extends AppCompatActivity {
 
                 if(date.compareTo(sdf.format(currentlyOn.getTime()))==0){
                     Toast.makeText(getApplicationContext(), "ten sam", Toast.LENGTH_SHORT).show();
-                    // TODO: 12.06.2020 do nothing probably
                 }else{
                     currentlyOn.set(year, month, dayOfMonth);
                     Button btn = findViewById(R.id.event);
                     btn.setVisibility(View.INVISIBLE);
                     for(Event ev : events){
                         if(sdf.format(currentlyOn.getTime()).compareTo(ev.getDate())==0){
-                            Toast.makeText(getApplicationContext(), "have events", Toast.LENGTH_SHORT).show();
-                            // TODO: 12.06.2020 show events assigned
 
                             btn.setVisibility(View.VISIBLE);
                             btn.setText(ev.getTraining().getName());
