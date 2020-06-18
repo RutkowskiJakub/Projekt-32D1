@@ -75,4 +75,6 @@ public class EventsExercises extends AppCompatActivity {
             }
         }
     } // getting the extras if exist
+
+
 }
