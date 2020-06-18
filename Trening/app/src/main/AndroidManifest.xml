@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         tools:replace="android:theme">
-        <activity android:name=".history.EventsExercises"></activity>
+        <activity android:name=".ustawienia.SettingsActivity"></activity>
+        <activity android:name=".history.EventsExercises" />
         <activity android:name=".history.Exing" />
         <activity android:name=".history.AddEvent" />
         <activity android:name=".history.kalendarz" />

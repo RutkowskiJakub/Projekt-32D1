@@ -14,6 +14,8 @@ import com.example.planertreningow.history.kalendarz;
 import com.example.planertreningow.szablony.TemplatesActivity;
 import com.example.planertreningow.treningi.TrainingsActivity;
 import com.example.planertreningow.treningi.encje.Training;
+import com.example.planertreningow.ustawienia.SettingsActivity;
+import com.example.planertreningow.ustawienia.User;
 import com.google.gson.Gson;
 
 import java.io.BufferedReader;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Training>trainings = new ArrayList<>();
     private ArrayList<Training>templates = new ArrayList<>();
     private ArrayList<Event>events = new ArrayList<>();
+    private  User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,10 +67,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void NavigateSettings(View view){
-        // TODO: 07.05.2020 add Settings Activity here
-//        startActivity(new Intent(this, SettingsActivity.class).
-//                putExtra("trainings", trainings).
-//                putExtra("templates", templates));
+        startActivity(new Intent(this, SettingsActivity.class).
+                putExtra("user", user));
     }
 
 //    Utilities
@@ -92,6 +93,12 @@ public class MainActivity extends AppCompatActivity {
                     parseAndSave();
                 }
             }// should be always in every activity to get the list of trainings
+            if(extras.getSerializable("user")!=null){
+                user = (User)extras.getSerializable("user");
+                if(user!=null){
+                    parseAndSave();
+                }
+            }
         }
     } // getting the extras if exist
     public void parseAndSave(){
@@ -99,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         String trainingsJson = null;
         String templatesJson = null;
         String eventsJson = null;
-        String settingsJson;
+        String settingsJson = null;
 
         if(trainings.size()!=0){
             trainingsJson = gson.toJson(trainings);
@@ -110,6 +117,10 @@ public class MainActivity extends AppCompatActivity {
         if(events.size()!=0){
             eventsJson = gson.toJson(events);
         }
+        if(user!=null){
+            settingsJson = gson.toJson(user);
+        }
+
 //        add settings here
         try {
             if(trainingsJson!=null) {
@@ -125,6 +136,11 @@ public class MainActivity extends AppCompatActivity {
             if(eventsJson!=null) {
                 OutputStreamWriter outputStreamWriterTemplates = new OutputStreamWriter(getApplicationContext().openFileOutput("events.txt", Context.MODE_PRIVATE));
                 outputStreamWriterTemplates.write(eventsJson);
+                outputStreamWriterTemplates.close();
+            }
+            if(settingsJson!=null) {
+                OutputStreamWriter outputStreamWriterTemplates = new OutputStreamWriter(getApplicationContext().openFileOutput("user.txt", Context.MODE_PRIVATE));
+                outputStreamWriterTemplates.write(settingsJson);
                 outputStreamWriterTemplates.close();
             }
         }catch (IOException e){
@@ -186,6 +202,19 @@ public class MainActivity extends AppCompatActivity {
                 inputStream.close();
                 eventsJsonString = stringBuilder.toString();
             }
+            inputStream = getApplicationContext().openFileInput("user.txt");
+            if(inputStream!=null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String recievestring = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((recievestring = bufferedReader.readLine())!=null){
+                    stringBuilder.append("").append(recievestring);
+                }
+                inputStream.close();
+                settingsJsonString = stringBuilder.toString();
+            }
 
         }catch (FileNotFoundException e){
             Log.e("Exception", "File not found: "+e.toString());
@@ -207,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
             events = new ArrayList<>(Arrays.asList(eventsJsonArray));
         }
         if(!settingsJsonString.isEmpty()){
-            // TODO: 28.05.2020 add settings loader here
+            user = gson.fromJson(settingsJsonString, User.class);
         }
     }
 
