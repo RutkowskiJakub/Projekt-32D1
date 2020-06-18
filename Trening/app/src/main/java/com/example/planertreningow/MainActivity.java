@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.example.planertreningow.history.Event;
+import com.example.planertreningow.history.kalendarz;
 import com.example.planertreningow.szablony.TemplatesActivity;
 import com.example.planertreningow.treningi.TrainingsActivity;
 import com.example.planertreningow.treningi.encje.Training;
@@ -25,7 +27,7 @@ import java.util.Arrays;
 public class MainActivity extends AppCompatActivity {
     private ArrayList<Training>trainings = new ArrayList<>();
     private ArrayList<Training>templates = new ArrayList<>();
-
+    private ArrayList<Event>events = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
 //    Navigation
     public void NavigateHistoryActivity(View view){
-        // TODO: 07.05.2020 add History activity here
-//        startActivity(new Intent(this, HistoryActivity.class).
-//                putExtra("trainings", trainings).
-//                putExtra("templates", templates));
+        startActivity(new Intent(this, kalendarz.class).
+                putExtra("trainings", trainings).
+                putExtra("events", events));
     }
     public void NavigateTemplatesActivity(View view){
         startActivity(new Intent(this, TemplatesActivity.class).
@@ -83,12 +84,19 @@ public class MainActivity extends AppCompatActivity {
                     parseAndSave();
                 }
             }// should be always in every activity to get the list of trainings
+            if(extras.getSerializable("events")!=null){
+                events = (ArrayList<Event>)extras.getSerializable("events");
+                if(events.size()!=0) {
+                    parseAndSave();
+                }
+            }// should be always in every activity to get the list of trainings
         }
     } // getting the extras if exist
     public void parseAndSave(){
         Gson gson = new Gson();
         String trainingsJson = null;
         String templatesJson = null;
+        String eventsJson = null;
         String settingsJson;
 
         if(trainings.size()!=0){
@@ -96,6 +104,9 @@ public class MainActivity extends AppCompatActivity {
         }
         if(templates.size()!=0){
             templatesJson = gson.toJson(templates);
+        }
+        if(events.size()!=0){
+            eventsJson = gson.toJson(events);
         }
 //        add settings here
         try {
@@ -107,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
             if(templatesJson!=null) {
                 OutputStreamWriter outputStreamWriterTemplates = new OutputStreamWriter(getApplicationContext().openFileOutput("templates.txt", Context.MODE_PRIVATE));
                 outputStreamWriterTemplates.write(templatesJson);
+                outputStreamWriterTemplates.close();
+            }
+            if(eventsJson!=null) {
+                OutputStreamWriter outputStreamWriterTemplates = new OutputStreamWriter(getApplicationContext().openFileOutput("events.txt", Context.MODE_PRIVATE));
+                outputStreamWriterTemplates.write(eventsJson);
                 outputStreamWriterTemplates.close();
             }
         }catch (IOException e){
@@ -121,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
         String trainingsJsonString = "";
         Training[]templatesJsonArray;
         String templatesJsonString = "";
+        Event[]eventsJsonArray;
+        String eventsJsonString = "";
+
         String settingsJsonString = "";
 //        load data from file
         try{
@@ -152,6 +171,19 @@ public class MainActivity extends AppCompatActivity {
                 inputStream.close();
                 templatesJsonString = stringBuilder.toString();
             }
+            inputStream = getApplicationContext().openFileInput("events.txt");
+            if(inputStream!=null) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String recievestring = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ((recievestring = bufferedReader.readLine())!=null){
+                    stringBuilder.append("").append(recievestring);
+                }
+                inputStream.close();
+                eventsJsonString = stringBuilder.toString();
+            }
 
         }catch (FileNotFoundException e){
             Log.e("Exception", "File not found: "+e.toString());
@@ -167,6 +199,10 @@ public class MainActivity extends AppCompatActivity {
         if(!templatesJsonString.isEmpty()){
             templatesJsonArray = gson.fromJson(templatesJsonString, Training[].class);
             templates = new ArrayList<>(Arrays.asList(templatesJsonArray));
+        }
+        if(!eventsJsonString.isEmpty()){
+            eventsJsonArray = gson.fromJson(eventsJsonString, Event[].class);
+            events = new ArrayList<>(Arrays.asList(eventsJsonArray));
         }
         if(!settingsJsonString.isEmpty()){
             // TODO: 28.05.2020 add settings loader here
